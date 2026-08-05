@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.imgur.com/jaY7FZM.jpeg" alt="FastGem Logo" width="180" style="border-radius: 16px;" />
+  <img src="https://i.imgur.com/HRHHyIt.jpeg" alt="FastGem Logo" width="180" style="border-radius: 16px;" />
 </p>
 
 # 💎 FastGem (FastGemini)
