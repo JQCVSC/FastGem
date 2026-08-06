@@ -1,12 +1,20 @@
-# FastGem 💎
+<p align="center">
+  <img src="https://i.imgur.com/hkRlTDp.png" alt="FastGem Logo" width="320" />
+</p>
 
-> **High-Throughput Gemini AI Agent Runtime**  
-> Engine powered natively for Google Gemini 3.6 Flash, Gemini 3.1 Pro, and Flash-Lite.
+<h1 align="center">FastGem</h1>
 
-[![GitHub Repository](https://img.shields.io/badge/GitHub-JQCVSC%2FFastGem-blue?logo=github)](https://github.com/JQCVSC/FastGem)
-[![License](https://img.shields.io/badge/License-Community-orange.svg)](https://github.com/JQCVSC/FastGem#license)
-[![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python)](https://pypi.org/project/fastgem)
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker)](https://github.com/JQCVSC/FastGem)
+<p align="center">
+  <strong>High-Throughput Gemini AI Agent Runtime</strong><br>
+  Engine powered natively for Google Gemini 3.6 Flash, Gemini 3.1 Pro, and Flash-Lite.
+</p>
+
+<p align="center">
+  <a href="https://github.com/JQCVSC/FastGem"><img src="https://img.shields.io/badge/GitHub-JQCVSC%2FFastGem-blue?logo=github" alt="GitHub Repository"></a>
+  <a href="https://github.com/JQCVSC/FastGem#license"><img src="https://img.shields.io/badge/License-Community-orange.svg" alt="License"></a>
+  <a href="https://pypi.org/project/fastgem"><img src="https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python" alt="Python"></a>
+  <a href="https://github.com/JQCVSC/FastGem"><img src="https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker" alt="Docker"></a>
+</p>
 
 ---
 
