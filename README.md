@@ -24,6 +24,22 @@
 
 ---
 
+## 📁 Workspace Architecture
+
+A standard FastGem agent workspace is structured as follows:
+
+```plaintext
+my-agent/
+├── SOUL.md              # System Instructions & Agent Persona
+├── MEMORY.md            # Long-term persistent facts & state
+├── tools/               # Custom Python execution tools
+│   ├── web_search.py
+│   └── custom_tool.py
+└── fastgem.config.json   # Agent runtime configuration
+```
+
+---
+
 ## ✨ Key Features
 
 - **⚡ Native Gemini 3 Engine**: Built from the ground up to leverage **Gemini 3.6 Flash**, **Gemini 3.1 Pro**, and **Flash-Lite**.
@@ -31,6 +47,19 @@
 - **🛠 Sub-Second Tool Execution**: Execute custom Python scripts, terminal commands, web fetchers, and AST parsers in a safe sandbox.
 - **🔌 Multi-Channel Integration**: Route agents to Discord, Telegram, Slack, Webhooks, or REST APIs effortlessly.
 - **🐳 Enterprise Containerization**: Ready for 1-click deployments on Google Cloud Run, GCP, AWS, or DigitalOcean via Docker or PyPI.
+
+---
+
+## ⚙️ Environment Configuration
+
+| Environment Variable | Description | Default | Required |
+| :--- | :--- | :--- | :---: |
+| `GEMINI_API_KEY` | Your Google Gemini API Key | — | **Yes** |
+| `FASTGEM_MODEL` | Default model (`gemini-3.6-flash`, `gemini-3.1-pro`) | `gemini-3.6-flash` | No |
+| `FASTGEM_PORT` | Port for FastGem runtime & channel webhooks | `8000` | No |
+| `FASTGEM_LOG_LEVEL` | Logging verbosity level (`DEBUG`, `INFO`, `WARN`) | `INFO` | No |
+| `TELEGRAM_BOT_TOKEN` | Token for Telegram Channel Gateway integration | — | No |
+| `DISCORD_BOT_TOKEN` | Token for Discord Channel Gateway integration | — | No |
 
 ---
 
@@ -61,12 +90,13 @@ docker run -d -p 8000:8000 -e GEMINI_API_KEY=$GEMINI_API_KEY ghcr.io/fastgem-ai/
 
 ## 💻 SDK Usage Example
 
-### Python SDK
+### Python SDK & Channel Gateway
 
 ```python
 import os
-from fastgem import FastGem
+from fastgem import FastGem, FastGemChannel
 
+# 1. Initialize FastGem agent client
 client = FastGem(api_key=os.getenv("GEMINI_API_KEY"))
 
 response = client.agent.run(
@@ -74,8 +104,13 @@ response = client.agent.run(
     prompt="Summarize the latest Gemini 3.6 Flash benchmarks",
     model="gemini-3.6-flash"
 )
-
 print(response.text)
+
+# 2. Bind Agent to Messaging Channels (Telegram, Discord, Slack)
+gateway = FastGemChannel(agent_id="researcher")
+gateway.bind_webhook(platform="telegram", bot_token=os.getenv("TELEGRAM_BOT_TOKEN"))
+gateway.bind_webhook(platform="discord", bot_token=os.getenv("DISCORD_BOT_TOKEN"))
+gateway.listen(port=8000)
 ```
 
 ### TypeScript SDK
