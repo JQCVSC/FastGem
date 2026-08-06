@@ -2,7 +2,7 @@
   <img src="https://i.imgur.com/hkRlTDp.png" alt="FastGem Logo" width="320" />
 </p>
 
-<h1 align="center">FastGem</h1>
+<h1 align="center">FastGem 💎</h1>
 
 <p align="center">
   <strong>High-Throughput Gemini AI Agent Runtime</strong><br>
@@ -83,7 +83,7 @@ curl -fsSL https://raw.githubusercontent.com/JQCVSC/FastGem/main/install | bash
 ### Option 3: Docker Container
 
 ```bash
-docker run -d -p 8000:8000 -e GEMINI_API_KEY=$GEMINI_API_KEY ghcr.io/fastgem-ai/fastgem:latest
+docker run -d -p 8000:8000 -e GEMINI_API_KEY=$GEMINI_API_KEY ghcr.io/jqcvsc/fastgem:latest
 ```
 
 ---
