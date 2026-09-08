@@ -48,7 +48,7 @@ export const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({ isOpen, 
             How we collect, use, and protect your personal information.
           </p>
           <p className="text-xs font-mono text-[#ff6b00] bg-[#131b2e] px-3 py-1.5 rounded-md inline-block border border-[#2b3850]">
-            Last updated: 2026-05-21
+            Last updated: {new Date().getFullYear()}-05-21
           </p>
         </div>
 
