@@ -79,7 +79,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenStudio, onOpenDocs, onOpen
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-[#3c4a46]/20 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono uppercase tracking-widest text-[#bacac5]/60">
-          <span>© 2026 FastGem AI. Built for speed.</span>
+          <span>© {new Date().getFullYear()} FastGem AI. Built for speed.</span>
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#ff6b00] animate-pulse"></span>

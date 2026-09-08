@@ -48,7 +48,7 @@ export const TermsOfServiceModal: React.FC<TermsOfServiceModalProps> = ({ isOpen
             The terms and conditions for using our service.
           </p>
           <p className="text-xs font-mono text-[#ff6b00] bg-[#131b2e] px-3 py-1.5 rounded-md inline-block border border-[#2b3850]">
-            Last updated: 2026-05-21
+            Last updated: 2024-05-21
           </p>
         </div>
 
