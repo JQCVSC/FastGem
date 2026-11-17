@@ -13,7 +13,7 @@ import { DocsModal } from './components/DocsModal';
 import { PrivacyPolicyModal } from './components/PrivacyPolicyModal';
 import { TermsOfServiceModal } from './components/TermsOfServiceModal';
 import { AuthModal } from './components/AuthModal';
-import { FastClawDashboard } from './components/FastClawDashboard';
+import { FastGemDashboard } from './components/FastGemDashboard';
 import { AgentPreset } from './types';
 
 export default function App() {
@@ -97,15 +97,15 @@ export default function App() {
         onOpenTerms={() => setTermsOpen(true)}
       />
 
-      {/* Auth Screen Modal (FastClaw Sign in / Sign up) */}
+      {/* Auth Screen Modal (FastGem Sign in / Sign up) */}
       <AuthModal 
         isOpen={authOpen}
         onClose={() => setAuthOpen(false)}
         onSuccess={handleAuthSuccess}
       />
 
-      {/* Interactive FastClaw Gateway Dashboard */}
-      <FastClawDashboard 
+      {/* Interactive FastGem Gateway Dashboard */}
+      <FastGemDashboard 
         isOpen={dashboardOpen}
         username={user}
         onClose={() => setDashboardOpen(false)}

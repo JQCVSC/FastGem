@@ -24,7 +24,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
 
     setTimeout(() => {
       setIsLoading(false);
-      const name = usernameOrEmail.split('@')[0] || 'FastClaw User';
+      const name = usernameOrEmail.split('@')[0] || 'FastGem User';
       setSignedInUser(name);
       setTimeout(() => {
         onSuccess(name);

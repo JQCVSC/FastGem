@@ -13,7 +13,7 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
   standalone = false,
 }) => {
   const [shareConfig, setShareConfig] = useState<boolean>(true);
-  const [activeModel, setActiveModel] = useState<string>('Inherit (clawrouter/claw-latest)');
+  const [activeModel, setActiveModel] = useState<string>('Inherit (gemini/gemini-2.5-flash)');
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
 
@@ -27,8 +27,8 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
   }>>([
     {
       id: '1',
-      name: 'clawrouter',
-      apiBase: 'http://clawrouter-api-svc.workany:3000',
+      name: 'gemini',
+      apiBase: 'https://generativelanguage.googleapis.com',
       apiKey: 'sk-h****oXhP',
       modelsCount: 1,
       source: 'Inherited from admin',
@@ -40,8 +40,8 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
   const [newApiKey, setNewApiKey] = useState('');
 
   const modelOptions = [
-    'Inherit (clawrouter/claw-latest)',
-    'clawrouter/claw-latest',
+    'Inherit (gemini/gemini-2.5-flash)',
+    'gemini/gemini-2.5-flash',
     'gemini-2.5-flash',
     'gemini-2.5-pro',
     'openai/gpt-4o',
@@ -184,7 +184,7 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
           </div>
 
           <p className="text-xs text-slate-500 dark:text-[#94a3b8] font-sans">
-            Using system default: <code className="font-mono text-slate-700 dark:text-slate-300">clawrouter/claw-latest</code>. Pick a model above to override for {agentName} only.
+            Using system default: <code className="font-mono text-slate-700 dark:text-slate-300">gemini/gemini-2.5-flash</code>. Pick a model above to override for {agentName} only.
           </p>
         </div>
 

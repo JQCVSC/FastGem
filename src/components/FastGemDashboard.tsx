@@ -39,14 +39,14 @@ import {
   Clock
 } from 'lucide-react';
 
-interface FastClawDashboardProps {
+interface FastGemDashboardProps {
   isOpen: boolean;
   username: string | null;
   onClose: () => void;
   onOpenStudio: (agent?: AgentPreset) => void;
 }
 
-export const FastClawDashboard: React.FC<FastClawDashboardProps> = ({
+export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
   isOpen,
   username,
   onClose,
@@ -68,7 +68,7 @@ export const FastClawDashboard: React.FC<FastClawDashboardProps> = ({
   const [newKeyValue, setNewKeyValue] = useState('');
   const [newKeyType, setNewKeyType] = useState<'User' | 'Agent'>('User');
 
-  const [defaultModel, setDefaultModel] = useState('clawrouter/claw-latest');
+  const [defaultModel, setDefaultModel] = useState('gemini/gemini-2.5-flash');
   const [isOverride, setIsOverride] = useState(true);
   const [testedProviderStatus, setTestedProviderStatus] = useState<Record<string, 'idle' | 'testing' | 'success' | 'failed'>>({});
   const [copiedBaseUrl, setCopiedBaseUrl] = useState<string | null>(null);
@@ -83,8 +83,8 @@ export const FastClawDashboard: React.FC<FastClawDashboardProps> = ({
   }>>([
     {
       id: 'prov_1',
-      name: 'clawrouter',
-      apiBase: 'http://clawrouter-api-svc.workany:3000',
+      name: 'gemini',
+      apiBase: 'https://generativelanguage.googleapis.com',
       apiKey: 'sk-h****oXhP',
       models: 1,
       source: 'Inherited',
@@ -100,7 +100,7 @@ export const FastClawDashboard: React.FC<FastClawDashboardProps> = ({
   const [saveSuccessNotice, setSaveSuccessNotice] = useState(false);
 
   const availableModelOptions = [
-    'clawrouter/claw-latest',
+    'gemini/gemini-2.5-flash',
     'gemini/gemini-2.5-flash',
     'gemini/gemini-2.5-pro',
     'openai/gpt-4o',
@@ -110,7 +110,7 @@ export const FastClawDashboard: React.FC<FastClawDashboardProps> = ({
   const handleOpenAddProvider = () => {
     setEditingProviderId(null);
     setProvNameInput('');
-    setProvBaseInput('http://clawrouter-api-svc.workany:3000');
+    setProvBaseInput('https://generativelanguage.googleapis.com');
     setProvKeyInput('');
     setProvModelsCountInput(1);
     setIsAddProviderOpen(true);
@@ -131,7 +131,7 @@ export const FastClawDashboard: React.FC<FastClawDashboardProps> = ({
       setProviders(providers.map(p => p.id === editingProviderId ? {
         ...p,
         name: provNameInput.trim(),
-        apiBase: provBaseInput.trim() || 'http://clawrouter-api-svc.workany:3000',
+        apiBase: provBaseInput.trim() || 'https://generativelanguage.googleapis.com',
         apiKey: provKeyInput.trim() || 'sk-h****oXhP',
         models: Number(provModelsCountInput) || 1
       } : p));
@@ -141,7 +141,7 @@ export const FastClawDashboard: React.FC<FastClawDashboardProps> = ({
         {
           id: `prov_${Date.now()}`,
           name: provNameInput.trim(),
-          apiBase: provBaseInput.trim() || 'http://clawrouter-api-svc.workany:3000',
+          apiBase: provBaseInput.trim() || 'https://generativelanguage.googleapis.com',
           apiKey: provKeyInput.trim() || 'sk-h****oXhP',
           models: Number(provModelsCountInput) || 1,
           source: 'Custom',
@@ -878,7 +878,7 @@ export const FastClawDashboard: React.FC<FastClawDashboardProps> = ({
                   type="text"
                   value={provNameInput}
                   onChange={(e) => setProvNameInput(e.target.value)}
-                  placeholder="e.g. clawrouter"
+                  placeholder="e.g. gemini"
                   className="w-full px-4 py-2.5 bg-white dark:bg-[#0b1326] border border-slate-300 dark:border-[#2b3850] rounded-xl text-sm text-slate-900 dark:text-[#dae2fd] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#ff6b00]/40 transition-all"
                 />
               </div>
@@ -891,7 +891,7 @@ export const FastClawDashboard: React.FC<FastClawDashboardProps> = ({
                   type="text"
                   value={provBaseInput}
                   onChange={(e) => setProvBaseInput(e.target.value)}
-                  placeholder="e.g. http://clawrouter-api-svc.workany:3000"
+                  placeholder="e.g. https://generativelanguage.googleapis.com"
                   className="w-full px-4 py-2.5 bg-white dark:bg-[#0b1326] border border-slate-300 dark:border-[#2b3850] rounded-xl text-sm font-mono text-slate-900 dark:text-[#dae2fd] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#ff6b00]/40 transition-all"
                 />
               </div>
