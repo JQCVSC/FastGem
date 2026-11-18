@@ -68,7 +68,7 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
   const [newKeyValue, setNewKeyValue] = useState('');
   const [newKeyType, setNewKeyType] = useState<'User' | 'Agent'>('User');
 
-  const [defaultModel, setDefaultModel] = useState('gemini/gemini-2.5-flash');
+  const [defaultModel, setDefaultModel] = useState('gemini/gemini-3.8-flash');
   const [isOverride, setIsOverride] = useState(true);
   const [testedProviderStatus, setTestedProviderStatus] = useState<Record<string, 'idle' | 'testing' | 'success' | 'failed'>>({});
   const [copiedBaseUrl, setCopiedBaseUrl] = useState<string | null>(null);
@@ -100,8 +100,8 @@ export const FastGemDashboard: React.FC<FastGemDashboardProps> = ({
   const [saveSuccessNotice, setSaveSuccessNotice] = useState(false);
 
   const availableModelOptions = [
-    'gemini/gemini-2.5-flash',
-    'gemini/gemini-2.5-flash',
+    'gemini/gemini-3.8-flash',
+    'gemini/gemini-3.8-flash',
     'gemini/gemini-2.5-pro',
     'openai/gpt-4o',
     'anthropic/claude-3-5-sonnet'

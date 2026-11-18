@@ -34,7 +34,7 @@ Add your key to `.env`:
 
 ```env
 GEMINI_API_KEY=your_gemini_api_key
-FASTGEM_MODEL=gemini-2.5-flash
+FASTGEM_MODEL=gemini-3.8-flash
 FASTGEM_PORT=8000
 ```
 
@@ -96,7 +96,7 @@ curl -sS http://localhost:8000/health
 Example response:
 
 ```json
-{"ok":true,"service":"fastgem-runtime","model":"gemini-2.5-flash"}
+{"ok":true,"service":"fastgem-runtime","model":"gemini-3.8-flash"}
 ```
 
 ### List agents
@@ -114,7 +114,7 @@ curl -sS -X POST http://localhost:8000/api/agents \
     "name": "Support Agent",
     "description": "A session-aware product support assistant.",
     "systemInstruction": "Answer clearly and keep responses concise.",
-    "model": "gemini-2.5-flash"
+    "model": "gemini-3.8-flash"
   }'
 ```
 
@@ -189,7 +189,7 @@ The current sign-in screen is a frontend development gate. It does not perform p
 | Variable | Description | Default | Required |
 | --- | --- | --- | --- |
 | `GEMINI_API_KEY` | Google Gemini API key used by the backend | — | Yes for runs |
-| `FASTGEM_MODEL` | Default Gemini model | `gemini-2.5-flash` | No |
+| `FASTGEM_MODEL` | Default Gemini model | `gemini-3.8-flash` | No |
 | `FASTGEM_PORT` | Runtime port | `8000` | No |
 | `FASTGEM_DATA_DIR` | Directory containing local runtime data | `.fastgem` | No |
 | `VITE_FASTGEM_RUNTIME_URL` | Website origin for the separate runtime | `http://localhost:8000` | Website only |

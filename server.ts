@@ -9,7 +9,7 @@ import { GoogleGenAI } from '@google/genai';
 dotenv.config();
 
 const PORT = Number(process.env.PORT || process.env.FASTGEM_PORT || 8000);
-const MODEL = process.env.FASTGEM_MODEL || 'gemini-2.5-flash';
+const MODEL = process.env.FASTGEM_MODEL || 'gemini-3.8-flash';
 const DATA_DIR = path.resolve(process.env.FASTGEM_DATA_DIR || '.fastgem');
 const DATA_FILE = path.join(DATA_DIR, 'data.json');
 

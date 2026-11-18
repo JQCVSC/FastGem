@@ -13,7 +13,7 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
   standalone = false,
 }) => {
   const [shareConfig, setShareConfig] = useState<boolean>(true);
-  const [activeModel, setActiveModel] = useState<string>('Inherit (gemini/gemini-2.5-flash)');
+  const [activeModel, setActiveModel] = useState<string>('Inherit (gemini/gemini-3.8-flash)');
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
 
@@ -40,9 +40,9 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
   const [newApiKey, setNewApiKey] = useState('');
 
   const modelOptions = [
-    'Inherit (gemini/gemini-2.5-flash)',
-    'gemini/gemini-2.5-flash',
-    'gemini-2.5-flash',
+    'Inherit (gemini/gemini-3.8-flash)',
+    'gemini/gemini-3.8-flash',
+    'gemini-3.8-flash',
     'gemini-2.5-pro',
     'openai/gpt-4o',
     'anthropic/claude-3-5-sonnet',
@@ -184,7 +184,7 @@ export const ModelsView: React.FC<ModelsViewProps> = ({
           </div>
 
           <p className="text-xs text-slate-500 dark:text-[#94a3b8] font-sans">
-            Using system default: <code className="font-mono text-slate-700 dark:text-slate-300">gemini/gemini-2.5-flash</code>. Pick a model above to override for {agentName} only.
+            Using system default: <code className="font-mono text-slate-700 dark:text-slate-300">gemini/gemini-3.8-flash</code>. Pick a model above to override for {agentName} only.
           </p>
         </div>
 
