@@ -129,7 +129,7 @@ app.post('/api/agents/:agentId/sessions', async (req, res) => {
   res.status(201).json({ session });
 });
 
-async function runAgent(agentId: string, sessionId: string, prompt: string) {
+async function prepareRun(agentId: string, sessionId: string, prompt: string) {
   const store = await loadStore();
   const agent = store.agents.find((candidate) => candidate.id === agentId);
   if (!agent) throw new Error('Agent not found');
@@ -141,6 +141,11 @@ async function runAgent(agentId: string, sessionId: string, prompt: string) {
   }
   session.messages.push({ role: 'user', text: prompt, createdAt: now() });
   const ai = new GoogleGenAI({ apiKey: requireApiKey() });
+  return { store, agent, session, ai };
+}
+
+async function runAgent(agentId: string, sessionId: string, prompt: string) {
+  const { store, agent, session, ai } = await prepareRun(agentId, sessionId, prompt);
   const response = await ai.models.generateContent({
     model: agent.model || MODEL,
     contents: session.messages.map((message) => ({ role: message.role, parts: [{ text: message.text }] })),
@@ -151,6 +156,28 @@ async function runAgent(agentId: string, sessionId: string, prompt: string) {
   session.updatedAt = now();
   await saveStore(store);
   return { text, session, model: agent.model || MODEL };
+}
+
+async function* streamAgent(agentId: string, sessionId: string, prompt: string) {
+  const { store, agent, session, ai } = await prepareRun(agentId, sessionId, prompt);
+  const model = agent.model || MODEL;
+  const stream = await ai.models.generateContentStream({
+    model,
+    contents: session.messages.map((message) => ({ role: message.role, parts: [{ text: message.text }] })),
+    config: { systemInstruction: agent.systemInstruction, temperature: 0.4 },
+  });
+  let text = '';
+  for await (const chunk of stream) {
+    const chunkText = chunk.text || '';
+    if (!chunkText) continue;
+    text += chunkText;
+    yield { type: 'token' as const, text: chunkText };
+  }
+  text = text || 'Gemini returned an empty response.';
+  session.messages.push({ role: 'model', text, createdAt: now() });
+  session.updatedAt = now();
+  await saveStore(store);
+  return { sessionId, model };
 }
 
 app.post('/api/agents/:agentId/runs', async (req, res) => {
@@ -172,12 +199,20 @@ app.get('/api/agents/:agentId/runs/stream', async (req, res) => {
   res.setHeader('Connection', 'keep-alive');
   try {
     if (!prompt) throw new Error('prompt is required');
-    res.write(`event: status\ndata: ${JSON.stringify({ status: 'running', model: MODEL })}\n\n`);
-    const result = await runAgent(req.params.agentId, sessionId, prompt);
-    for (const chunk of result.text.match(/.{1,80}/g) || []) {
-      res.write(`event: token\ndata: ${JSON.stringify({ text: chunk })}\n\n`);
+    const store = await loadStore();
+    const agent = store.agents.find((candidate) => candidate.id === req.params.agentId);
+    if (!agent) throw new Error('Agent not found');
+    res.write(`event: status\ndata: ${JSON.stringify({ status: 'running', model: agent.model || MODEL })}\n\n`);
+    const stream = streamAgent(req.params.agentId, sessionId, prompt);
+    while (true) {
+      const result = await stream.next();
+      if (result.done === true) {
+        res.write(`event: done\ndata: ${JSON.stringify(result.value)}\n\n`);
+        break;
+      }
+      const token = result.value as { type: 'token'; text: string };
+      res.write(`event: token\ndata: ${JSON.stringify({ text: token.text })}\n\n`);
     }
-    res.write(`event: done\ndata: ${JSON.stringify({ sessionId, model: result.model })}\n\n`);
   } catch (error) {
     res.write(`event: error\ndata: ${JSON.stringify({ error: error instanceof Error ? error.message : 'Run failed' })}\n\n`);
   } finally {

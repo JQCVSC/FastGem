@@ -149,13 +149,13 @@ curl -sS -X POST http://localhost:8000/api/agents/researcher/runs \
   }'
 ```
 
-### Streaming run foundation
+### Streaming runs
 
 ```text
 GET /api/agents/:agentId/runs/stream?prompt=...&sessionId=...
 ```
 
-The endpoint emits `status`, `token`, `done`, or `error` server-sent events. The current implementation chunks the completed model response for progressive delivery; it is a foundation for richer streaming behavior.
+The endpoint emits `status`, `token`, `done`, or `error` server-sent events. `token` events are forwarded from Gemini as the provider generates them, and the completed response is persisted to the session when the stream finishes.
 
 ## Website and Agent Studio
 
