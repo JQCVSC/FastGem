@@ -45,7 +45,17 @@ const id = (prefix: string) => `${prefix}_${crypto.randomUUID().slice(0, 12)}`;
 
 async function loadStore(): Promise<Store> {
   try {
-    return JSON.parse(await fs.readFile(DATA_FILE, 'utf8')) as Store;
+    const store = JSON.parse(await fs.readFile(DATA_FILE, 'utf8')) as Store;
+    let migrated = false;
+    for (const agent of store.agents) {
+      if (agent.model === 'gemini-2.5-flash') {
+        agent.model = MODEL;
+        agent.updatedAt = now();
+        migrated = true;
+      }
+    }
+    if (migrated) await saveStore(store);
+    return store;
   } catch {
     const timestamp = now();
     const seed: Agent = {
